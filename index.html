@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nafasi Resort - Space Allocation Visual Guide</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: #202124;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0;
+            background: #fafafa;
+            scroll-behavior: smooth;
+        }
+
+        .container {
+            background: #fff;
+            margin: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .header {
+            background: #4285f4;
+            color: white;
+            padding: 60px 40px;
+            text-align: center;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 0 0 16px 0;
+            color: white;
+            text-shadow: none;
+        }
+        
+        .subtitle {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            margin: 0;
+            font-weight: 400;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .nav-tabs {
+            display: flex;
+            flex-direction: column;
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 4px;
+            margin-bottom: 40px;
+            gap: 4px;
+        }
+
+        .nav-tab {
+            width: 100%;
+            padding: 16px 20px;
+            text-align: center;
+            background: transparent;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #5f6368;
+            transition: all 0.2s ease;
+            min-height: 44px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .nav-tab:hover {
+            background: rgba(66, 133, 244, 0.1);
+            color: #4285f4;
+        }
+
+        .nav-tab.active {
+            background: #4285f4;
+            color: white;
+            box-shadow: 0 2px 4px rgba(66, 133, 244, 0.3);
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin: 0 0 24px 0;
+            color: #202124;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            background: #4285f4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin: 32px 0 16px 0;
+            color: #202124;
+            border-left: 4px solid #4285f4;
+            padding-left: 16px;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin: 24px 0 12px 0;
+            color: #202124;
+        }
+
+        p {
+            margin-bottom: 16px;
+            color: #5f6368;
+            line-height: 1.7;
+        }
+        
+        ul {
+            margin: 16px 0;
+            padding-left: 24px;
+        }
+        
+        li {
+            margin-bottom: 8px;
+            color: #5f6368;
+        }
+        
+        .highlight {
+            background: #f8f9fa;
+            border-left: 4px solid #4285f4;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        
+        .stats {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+        
+        .stat-number {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4285f4;
+            display: block;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .bua-color { color: #4285f4; }
+        .non-bua-color { color: #34a853; }
+        .shared-color { color: #ea4335; }
+        .total-color { color: #9aa0a6; }
+
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .column {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            border-radius: 4px;
+            text-align: left;
+        }
+
+        .facility-total {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4285f4;
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .component {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            margin-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .component-name {
+            font-weight: 500;
+            color: #333;
+        }
+
+        .component-size {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .component-type {
+            font-size: 0.8rem;
+            padding: 2px 6px;
+            border-radius: 3px;
+            color: white;
+            margin-left: 10px;
+        }
+
+        .component-type.bua { background: #4285f4; }
+        .component-type.non-bua { background: #34a853; }
+
+        .facility-description {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-top: 1rem;
+        }
+
+        .room-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin: 2rem 0;
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid #ddd;
+            background: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .room-table th,
+        .room-table td {
+            padding: 14px 18px;
+            text-align: left;
+            border-bottom: 1px solid #eee;
+            vertical-align: top;
+        }
+        
+        .room-table th {
+            background: #4285f4;
+            color: white;
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .room-table tr:hover {
+            background: rgba(66, 133, 244, 0.03);
+        }
+        
+        .room-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .room-table td:first-child {
+            font-weight: 600;
+            color: #333;
+        }
+
+        .size-breakdown {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .size-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: white;
+        }
+
+        .size-badge.bua { background: #4285f4; }
+        .size-badge.non-bua { background: #34a853; }
+
+        .status-indicator {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            display: inline-block;
+            margin: 0 auto;
+        }
+
+        .status-indicator.bua { background: #4285f4; }
+        .status-indicator.non-bua { background: #34a853; }
+        .status-indicator.shared { background: #ea4335; }
+
+        .legend {
+            background: #f8f9fa;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-radius: 4px;
+        }
+
+        .legend-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem;
+            background: white;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+        }
+
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+        }
+
+        .legend-color.bua { background: #4285f4; }
+        .legend-color.non-bua { background: #34a853; }
+        .legend-color.shared { background: #ea4335; }
+        .legend-color.complex { background: #9aa0a6; }
+
+        /* Mobile-first responsive design */
+        @media (min-width: 768px) {
+            .nav-tabs {
+                flex-direction: row;
+                gap: 0;
+            }
+            
+            .nav-tab {
+                flex: 1;
+                padding: 12px 20px;
+                min-height: auto;
+            }
+            
+            .container {
+                margin: 20px;
+            }
+            
+            .content {
+                padding: 40px;
+            }
+        }
+
+        @media (max-width: 767px) {
+            .container {
+                margin: 10px;
+                border-radius: 0;
+            }
+            
+            .header {
+                padding: 40px 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .three-columns {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.5rem;
+            }
+            
+            .stat-item {
+                padding: 0.75rem;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .room-table {
+                font-size: 0.9rem;
+                overflow-x: auto;
+                display: block;
+                white-space: nowrap;
+            }
+            
+            .room-table th,
+            .room-table td {
+                padding: 10px 12px;
+                min-width: 120px;
+            }
+            
+            .room-table th:first-child,
+            .room-table td:first-child {
+                min-width: 180px;
+                position: sticky;
+                left: 0;
+                background: white;
+                z-index: 1;
+            }
+            
+            .room-table th:first-child {
+                background: #4285f4;
+            }
+            
+            h2 {
+                font-size: 1.5rem;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+            }
+            
+            h3 {
+                font-size: 1.25rem;
+                margin: 24px 0 12px 0;
+            }
+            
+            h4 {
+                font-size: 1.1rem;
+            }
+            
+            .legend-grid {
+                grid-template-columns: 1fr;
+                gap: 0.5rem;
+            }
+            
+            .legend-item {
+                padding: 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .nav-tab {
+                padding: 14px 16px;
+                font-size: 0.9rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+                line-height: 1.4;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-content">
+                <h1 style="border-bottom: 2px solid #fff; padding-bottom: 10px; margin-bottom: 0.5rem;">Nafasi</h1>
+                <p class="subtitle">Architectural Brief: Zanzibar's First Family-Centered Wellness Destination</p>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="stats">
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <span class="stat-number total-color">2,775</span>
+                        <div class="stat-label">Total Development sqm</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number bua-color">1,005</span>
+                        <div class="stat-label">BUA sqm</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number non-bua-color">1,770</span>
+                        <div class="stat-label">Non-BUA sqm</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">12</span>
+                        <div class="stat-label">Guest Rooms</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showTab('concept')">Project Concept</button>
+                <button class="nav-tab" onclick="showTab('demographics')">Demographics</button>
+                <button class="nav-tab" onclick="showTab('site-analysis')">Site Analysis</button>
+                <button class="nav-tab" onclick="showTab('master-table')">Facility Breakdown</button>
+            </div>
+
+            <div id="concept" class="tab-content active">
+                <h2>Project Concept</h2>
+                <p>Revolutionary hospitality concept - Zanzibar's first comprehensive family wellness destination</p>
+
+                <div class="highlight">
+                    <h3>Project Vision</h3>
+                    <p>Nafasi represents a revolutionary hospitality concept - Zanzibar's first comprehensive family wellness destination that combines professional childcare, wellness programming, and authentic community engagement. The resort serves as the central amenity hub for its 12 hotel rooms and 35 adjacent villas while delivering a unique "parallel family experience" where parents enjoy wellness activities while children engage in supervised cultural and educational programs.</p>
+                </div>
+
+                <h3>Authentic African & Zanzibari Experience</h3>
+                <p>Nafasi delivers genuine African hospitality rooted in the Ubuntu philosophy of interconnectedness - "I am because we are." Unlike generic resort experiences, every aspect of the resort embodies true Zanzibari culture through traditional Swahili architecture, local artisan partnerships, and immersive cultural programming. Guests experience authentic African warmth through community-centered service, traditional storytelling, and meaningful connections with local families and traditions.</p>
+
+                <h3>Core Design Principles</h3>
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>Family-Centric Architecture</h4>
+                        <p>All spaces designed with families in mind - from childproofed accommodations to sightlines between parent and children's areas, creating safe environments that enable both connection and independence.</p>
+                    </div>
+                    <div class="column">
+                        <h4>Integrated Wellness Design</h4>
+                        <p>Seamless flow between wellness facilities and family spaces, allowing for both parallel activities (adults/children) and shared family wellness experiences.</p>
+                    </div>
+                    <div class="column">
+                        <h4>Authentic Zanzibari Community Connection</h4>
+                        <p>Direct integration with local fishing village and community schools. Traditional craft workshops, Swahili language immersion, and cultural exchange programs create meaningful connections beyond typical resort experiences.</p>
+                    </div>
+                </div>
+
+                <h3>Unique Selling Propositions</h3>
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>First-Mover Advantage</h4>
+                        <ul>
+                            <li>Zanzibar's first family wellness community resort</li>
+                            <li>Professional childcare integrated with wellness programming</li>
+                            <li>Authentic community engagement through local partnerships</li>
+                            <li>Multi-generational accommodation design</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Authentic Community Impact</h4>
+                        <ul>
+                            <li>Local school partnerships within walking distance</li>
+                            <li>Real educational and volunteer opportunities</li>
+                            <li>Traditional craft workshops with local artisans</li>
+                            <li>Sustainable tourism model with measurable impact</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Premium Family Experience</h4>
+                        <ul>
+                            <li>Guilt-free wellness time for parents</li>
+                            <li>Educational and cultural enrichment for children</li>
+                            <li>Professional nanny services with local cultural education</li>
+                            <li>Extended stay programming for deeper experiences</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Competitive Advantages</h3>
+                <div class="highlight">
+                    <h4>Revolutionary Family Wellness Model</h4>
+                    <p>The resort's innovative approach enables parents to enjoy comprehensive wellness experiences while children participate in supervised cultural and educational programs. This "parallel family experience" addresses the primary challenge of family travel - balancing adult relaxation with children's engagement.</p>
+                    
+                    <div class="three-columns">
+                        <div class="column">
+                            <h4>Professional Childcare Excellence</h4>
+                            <ul>
+                                <li>Certified nanny services with local cultural education</li>
+                                <li>Intergenerational activity programming</li>
+                                <li>Safety-first design with visual sightlines</li>
+                                <li>Educational sustainability workshops</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Authentic Cultural Integration</h4>
+                            <ul>
+                                <li>Traditional Swahili architecture and materials</li>
+                                <li>Local artisan craft workshops</li>
+                                <li>Community school partnerships</li>
+                                <li>Ubuntu philosophy in service delivery</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Sustainable Tourism Leadership</h4>
+                            <ul>
+                                <li>60% renewable energy from solar systems</li>
+                                <li>Rainwater harvesting and greywater recycling</li>
+                                <li>Permaculture learning gardens</li>
+                                <li>Measurable community impact programs</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Market Positioning</h3>
+                <p>Nafasi establishes a new category in family hospitality - the Family Wellness Community Resort. Unlike traditional family resorts focused on entertainment, or adult wellness retreats that exclude children, Nafasi creates a sophisticated environment where families can experience authentic culture, meaningful wellness, and genuine community connection simultaneously.</p>
+
+                <div class="stats">
+                    <h4>Target Market Validation</h4>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">35%</span>
+                            <div class="stat-label">German travelers planning family trips</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">52%</span>
+                            <div class="stat-label">French travelers prioritize cultural experiences</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">41%</span>
+                            <div class="stat-label">UK travelers consider environmental impact</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">22%</span>
+                            <div class="stat-label">German travelers planning multi-generational trips</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3>Implementation Philosophy</h3>
+                    <p>Every design decision at Nafasi reflects the Ubuntu principle that "I am because we are." From the architectural integration with existing trees to the employment of local artisans, from the educational programming with community schools to the sustainable systems that benefit the broader environment - Nafasi demonstrates that luxury hospitality can be a force for positive community impact while delivering exceptional guest experiences.</p>
+                </div>
+
+                <div class="highlight">
+                    <h3>Facility Breakdown Summary</h3>
+                    <p>Complete development totaling <strong>2,775 sqm</strong> across three operational categories serving both hotel guests and 35 villa residents.</p>
+                    
+                    <div class="three-columns">
+                        <div class="column">
+                            <h4 class="bua-color">Built-Up Area (1,005 sqm)</h4>
+                            <div class="component">
+                                <span class="component-name">Guest Accommodations</span>
+                                <span class="component-size">700 sqm</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">Family Wellness Hub</span>
+                                <span class="component-size">125 sqm</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">Indoor F&B Facilities</span>
+                                <span class="component-size">180 sqm</span>
+                            </div>
+                            <div class="facility-description">
+                                Indoor hotel facilities including 12 guest rooms, professional childcare, and jungle immersive dining.
+                            </div>
+                        </div>
+                        <div class="column">
+                            <h4 class="non-bua-color">Outdoor Facilities (1,475 sqm)</h4>
+                            <div class="component">
+                                <span class="component-name">Pool Complex</span>
+                                <span class="component-size">650 sqm</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">Wellness & Activities</span>
+                                <span class="component-size">650 sqm</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">Support Infrastructure</span>
+                                <span class="component-size">175 sqm</span>
+                            </div>
+                            <div class="facility-description">
+                                Comprehensive outdoor programming including pools, spa pavilions, adventure playground, and permaculture gardens.
+                            </div>
+                        </div>
+                        <div class="column">
+                            <h4 class="shared-color">Shared Services (295 sqm)</h4>
+                            <div class="component">
+                                <span class="component-name">Reception & Guest Services</span>
+                                <span class="component-size">65 sqm</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">Co-Working Space</span>
+                                <span class="component-size">30 sqm</span>
+                            </div>
+                            <div class="component">
+                                <span class="component-name">Back-of-House Operations</span>
+                                <span class="component-size">200 sqm</span>
+                            </div>
+                            <div class="facility-description">
+                                Operational facilities serving both hotel guests and 35 villa residents with shared reception, workspace, and support services.
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="stats-grid" style="margin-top: 2rem;">
+                        <div class="stat-item">
+                            <span class="stat-number bua-color">36%</span>
+                            <div class="stat-label">BUA Allocation</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number non-bua-color">53%</span>
+                            <div class="stat-label">Outdoor Programming</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number shared-color">11%</span>
+                            <div class="stat-label">Shared Services</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number total-color">47</span>
+                            <div class="stat-label">Total Units Served<br/>(12 Hotel + 35 Villas)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="master-table" class="tab-content">
+                <h2>Master Facility Table</h2>
+                <p>Comprehensive table showing all structures with size, BUA classification, category, and function</p>
+
+                <div class="legend">
+                    <h4>Color Coding Legend</h4>
+                    <div class="legend-grid">
+                        <div class="legend-item">
+                            <div class="legend-color bua"></div>
+                            <span>BUA (Built-Up Area)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color non-bua"></div>
+                            <span>Non-BUA (Outdoor Facilities)</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color shared"></div>
+                            <span>Shared Services</span>
+                        </div>
+                    </div>
+                </div>
+
+                <table class="room-table">
+                    <thead>
+                        <tr>
+                            <th>Facility Name</th>
+                            <th>Size (sqm)</th>
+                            <th>BUA Status</th>
+                            <th>Category</th>
+                            <th>Primary Function</th>
+                            <th>Serves</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Guest Accommodations -->
+                        <tr style="background-color: rgba(66, 133, 244, 0.1);">
+                            <td colspan="6"><strong>GUEST ACCOMMODATIONS (700 sqm)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Standard Room (x6)</td>
+                            <td>300 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator bua"></span></td>
+                            <td>Accommodation</td>
+                            <td>Guest lodging - 50 sqm each with king bed, sofa bed, sitting area, private balcony</td>
+                            <td>Hotel Only</td>
+                        </tr>
+                        <tr>
+                            <td>Deluxe Room (x4)</td>
+                            <td>240 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator bua"></span></td>
+                            <td>Accommodation</td>
+                            <td>Premium guest lodging - 60 sqm each with enhanced amenities, accessible design, garden terrace</td>
+                            <td>Hotel Only</td>
+                        </tr>
+                        <tr>
+                            <td>Premium Suite (x2)</td>
+                            <td>160 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator bua"></span></td>
+                            <td>Accommodation</td>
+                            <td>Luxury family suites - 80 sqm each with two bedrooms, kitchenette, private terrace</td>
+                            <td>Hotel Only</td>
+                        </tr>
+                        
+                        <!-- F&B Operations -->
+                        <tr style="background-color: rgba(66, 133, 244, 0.1);">
+                            <td colspan="6"><strong>FOOD & BEVERAGE OPERATIONS (220 sqm total)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Family Restaurant</td>
+                            <td>140 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator bua"></span></td>
+                            <td>F&B</td>
+                            <td>Jungle immersive dining - 80 covers, living tropical vegetation, open kitchen, family features</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Pool Bar</td>
+                            <td>40 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator bua"></span></td>
+                            <td>F&B</td>
+                            <td>Poolside service - beverages, light meals, equipment storage</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Restaurant Outdoor Pergola</td>
+                            <td>40 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>F&B</td>
+                            <td>Covered outdoor dining - garden views, weather protection</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        
+                        <!-- Wellness Facilities -->
+                        <tr style="background-color: rgba(66, 133, 244, 0.1);">
+                            <td colspan="6"><strong>WELLNESS FACILITIES (775 sqm total)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Intergenerational Activity Center</td>
+                            <td>80 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator bua"></span></td>
+                            <td>Wellness</td>
+                            <td>Indoor family activities - flexible zones, mixed-age interaction, adaptive equipment</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Nanny Station & Support</td>
+                            <td>45 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator bua"></span></td>
+                            <td>Wellness</td>
+                            <td>Professional childcare - staff oversight, first aid, parent communication</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Community & Wellness Pavilion</td>
+                            <td>180 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Wellness</td>
+                            <td>Multi-purpose pavilion - yoga, cultural workshops, cooking classes, demonstrations</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Adventure Playground</td>
+                            <td>150 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Wellness</td>
+                            <td>Children's recreation - natural materials, age-appropriate zones, safety surfacing</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Spa Treatment Pavilions (x4)</td>
+                            <td>120 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Wellness</td>
+                            <td>Adult spa treatments - 30 sqm each, makuti roofing, privacy screens</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Permaculture Learning Garden</td>
+                            <td>200 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Wellness</td>
+                            <td>Educational sustainability - organic gardens, composting, rainwater harvesting</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        
+                        <!-- Pool Complex -->
+                        <tr style="background-color: rgba(52, 168, 83, 0.1);">
+                            <td colspan="6"><strong>POOL COMPLEX (650 sqm)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Main Family Pool</td>
+                            <td>200 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Recreation</td>
+                            <td>Primary aquatic facility - infinity edge, family-friendly depth zones</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Children's Pool</td>
+                            <td>50 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Recreation</td>
+                            <td>Kids aquatic facility - shallow depth, safety features, non-slip surfaces</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Pool Deck & Lounging</td>
+                            <td>400 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Recreation</td>
+                            <td>Relaxation area - extensive lounging, natural shade, family seating</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        
+                        <!-- Shared Services -->
+                        <tr style="background-color: rgba(234, 67, 53, 0.1);">
+                            <td colspan="6"><strong>SHARED SERVICES (295 sqm)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Reception & Guest Services Building</td>
+                            <td>65 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator shared"></span></td>
+                            <td>Operations</td>
+                            <td>Guest services - family reception, concierge, guest information</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Co-Working Space</td>
+                            <td>30 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator shared"></span></td>
+                            <td>Operations</td>
+                            <td>Dedicated workspace for guests - quiet environment, visual connection to children's areas</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Back-of-House Operations</td>
+                            <td>200 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator shared"></span></td>
+                            <td>Operations</td>
+                            <td>Operational support - staff areas, storage, laundry, maintenance, waste management</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        
+                        <!-- Support Infrastructure -->
+                        <tr style="background-color: rgba(52, 168, 83, 0.1);">
+                            <td colspan="6"><strong>SUPPORT INFRASTRUCTURE (175 sqm)</strong></td>
+                        </tr>
+                        <tr>
+                            <td>Pool & Restaurant Support Building</td>
+                            <td>35 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Support</td>
+                            <td>Facility support - changing rooms, family WCs, outdoor showers, equipment storage</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        <tr>
+                            <td>Covered Walkways</td>
+                            <td>100 sqm</td>
+                            <td style="text-align: center;"><span class="status-indicator non-bua"></span></td>
+                            <td>Support</td>
+                            <td>Infrastructure - weather protection, accessible pathways, facility connections</td>
+                            <td>Hotel + Villas</td>
+                        </tr>
+                        
+                        <!-- Totals -->
+                        <tr style="background-color: #4285f4; color: white; font-weight: bold;">
+                            <td><strong>TOTAL DEVELOPMENT</strong></td>
+                            <td><strong>2,775 sqm</strong></td>
+                            <td><strong>Mixed</strong></td>
+                            <td><strong>Complete Resort</strong></td>
+                            <td><strong>Family Wellness Community Resort</strong></td>
+                            <td><strong>Hotel + 35 Villas</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="highlight">
+                    <h3>Development Summary</h3>
+                    <p>Complete resort development totaling <strong>2,775 sqm</strong> serving an integrated community of hotel guests and villa residents.</p>
+                    
+                    <div class="stats-grid" style="margin-top: 2rem;">
+                        <div class="stat-item" style="border-left: 4px solid #4285f4;">
+                            <span class="stat-number bua-color">1,005 sqm</span>
+                            <div class="stat-label"><strong>BUA (36%)</strong><br/>Indoor hotel facilities - guest accommodations, family wellness hub, jungle immersive dining</div>
+                        </div>
+                        <div class="stat-item" style="border-left: 4px solid #34a853;">
+                            <span class="stat-number non-bua-color">1,475 sqm</span>
+                            <div class="stat-label"><strong>Non-BUA (53%)</strong><br/>Outdoor programming - pools, spa pavilions, adventure playground, permaculture gardens</div>
+                        </div>
+                        <div class="stat-item" style="border-left: 4px solid #ea4335;">
+                            <span class="stat-number shared-color">295 sqm</span>
+                            <div class="stat-label"><strong>Shared Services (11%)</strong><br/>Integrated operations - reception, co-working space, back-of-house serving hotel + villas</div>
+                        </div>
+                        <div class="stat-item" style="border-left: 4px solid #9aa0a6;">
+                            <span class="stat-number total-color">47 Units</span>
+                            <div class="stat-label"><strong>Total Served</strong><br/>Complete resort community - 12 hotel rooms + 35 villas</div>
+                        </div>
+                    </div>
+
+                    <div class="three-columns" style="margin-top: 2rem;">
+                        <div class="column" style="border-left: 4px solid #4285f4;">
+                            <h4 class="bua-color">BUA Facilities</h4>
+                            <p><strong>1,005 sqm (36%)</strong> of indoor hotel facilities optimized within regulatory limits</p>
+                            <ul>
+                                <li><strong>700 sqm:</strong> Guest accommodations (12 rooms)</li>
+                                <li><strong>125 sqm:</strong> Family wellness hub with professional childcare</li>
+                                <li><strong>180 sqm:</strong> Food & beverage operations</li>
+                            </ul>
+                        </div>
+                        <div class="column" style="border-left: 4px solid #34a853;">
+                            <h4 class="non-bua-color">Outdoor Programming</h4>
+                            <p><strong>1,475 sqm (53%)</strong> of comprehensive outdoor facilities and infrastructure</p>
+                            <ul>
+                                <li><strong>650 sqm:</strong> Pool complex with family and children's pools</li>
+                                <li><strong>650 sqm:</strong> Wellness pavilions and activity areas</li>
+                                <li><strong>175 sqm:</strong> Support infrastructure and walkways</li>
+                            </ul>
+                        </div>
+                        <div class="column" style="border-left: 4px solid #ea4335;">
+                            <h4 class="shared-color">Integrated Services</h4>
+                            <p><strong>295 sqm (11%)</strong> of shared operational facilities serving both hotel and villa guests</p>
+                            <ul>
+                                <li><strong>65 sqm:</strong> Reception and guest services</li>
+                                <li><strong>30 sqm:</strong> Co-working space</li>
+                                <li><strong>200 sqm:</strong> Back-of-house operations</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div style="text-align: center; margin-top: 2rem; padding: 1.5rem; background: rgba(66, 133, 244, 0.05); border-radius: 8px;">
+                        <h4 style="margin: 0 0 0.5rem 0; color: #202124;">Integrated Resort Community Model</h4>
+                        <p style="margin: 0; color: #5f6368; font-size: 1.1rem;">Nafasi serves as the central amenity hub for 47 total units, creating economies of scale and authentic community experiences through shared facilities and programming.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="site-analysis" class="tab-content">
+                <h2>Site Analysis</h2>
+                <p>Comprehensive analysis of site advantages, constraints, and design opportunities for the Nafasi Resort development</p>
+
+                <div class="highlight">
+                    <h3>Project Parameters</h3>
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">1,000</span>
+                            <div class="stat-label">sqm BUA Limit<br/>(Built-Up Area)</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">12</span>
+                            <div class="stat-label">Guest Rooms<br/>(Optimized Mix)</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">40-50</span>
+                            <div class="stat-label">meters Beach Frontage<br/>(West-facing Sunset)</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">35</span>
+                            <div class="stat-label">Adjacent Villas<br/>(Integrated Services)</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Site Advantages & Design Opportunities</h3>
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>Natural Advantages</h4>
+                        <ul>
+                            <li><strong>Ocean Breeze:</strong> Direct oceanfront location with constant cooling sea breeze reducing HVAC requirements</li>
+                            <li><strong>Sunset Coast Premium:</strong> West-facing orientation for spectacular sunset views from all major facilities</li>
+                            <li><strong>Coral Reef Protection:</strong> Natural reef creates calm waters ideal for families with children</li>
+                            <li><strong>Natural Landscape:</strong> Existing mature trees provide natural shade and cooling</li>
+                            <li><strong>Natural Contours:</strong> Varied topography offers design opportunities for terraced development</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Strategic Location Benefits</h4>
+                        <ul>
+                            <li><strong>Proximity to General Hospital:</strong> Medical facilities access within reasonable distance for family safety</li>
+                            <li><strong>Private Area:</strong> Secluded location ensuring guest privacy while maintaining accessibility</li>
+                            <li><strong>Community School Proximity:</strong> Walking distance to local educational facilities for authentic cultural programming</li>
+                            <li><strong>Traditional Fishing Village:</strong> Authentic local community setting for genuine cultural experiences</li>
+                            <li><strong>Infrastructure Access:</strong> Existing road access and utility connections available</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Development Opportunities</h4>
+                        <ul>
+                            <li><strong>Integrated Villa Community:</strong> Central amenity hub serving 35 adjacent villas creates economies of scale</li>
+                            <li><strong>Shared Services Model:</strong> Cost optimization through shared reception, back-of-house, and maintenance facilities</li>
+                            <li><strong>Sunset Positioning:</strong> All major facilities can be oriented for optimal sunset views</li>
+                            <li><strong>Natural Cooling:</strong> Ocean breeze and mature trees reduce mechanical cooling needs</li>
+                            <li><strong>Authentic Integration:</strong> Proximity to local community enables genuine cultural programming</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Design Constraints & Requirements</h3>
+                <div class="highlight">
+                    <h4>Critical Land Allocation Requirement</h4>
+                    <p><strong>Developer Action Required:</strong> The specific plot area for the hotel project must be clearly defined and allocated within the overall development. The hotel land allocation must accommodate:</p>
+                    <ul>
+                        <li><strong>1,000 sqm BUA (Built-Up Area)</strong> - Indoor hotel facilities</li>
+                        <li><strong>1,770 sqm outdoor programming facilities</strong> - Pool complex, wellness pavilions, shared services</li>
+                        <li><strong>Appropriate setbacks, landscaping, and operational space</strong> - Circulation, parking, service access</li>
+                        <li><strong>Integration with villa development</strong> - Seamless service delivery and shared facility access</li>
+                    </ul>
+                    <p><strong>Timeline:</strong> This allocation must be finalized prior to detailed design to ensure adequate space for the complete resort program totaling 2,775 sqm of developed facilities.</p>
+                </div>
+
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>Site & Environmental Constraints</h4>
+                        <ul>
+                            <li><strong>Tree Preservation:</strong> Design around existing mature trees to maintain natural cooling and landscape character</li>
+                            <li><strong>Natural Contours:</strong> Follow land's natural topography to minimize earthwork and preserve drainage patterns</li>
+                            <li><strong>Coral Reef Consideration:</strong> Limited direct beach access due to protective reef - design for viewing rather than beach activities</li>
+                            <li><strong>Seasonal Weather:</strong> Design for monsoon seasons with appropriate drainage and weather protection</li>
+                            <li><strong>Soil Conditions:</strong> Foundation design must account for coastal soil conditions and potential salt exposure</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Development Standards & Regulations</h4>
+                        <ul>
+                            <li><strong>BUA Limitation:</strong> Maximum 1,000 sqm built-up area for hotel facilities - requires careful space optimization</li>
+                            <li><strong>Villa Integration:</strong> Seamless service delivery to 35 adjacent villas without compromising hotel guest experience</li>
+                            <li><strong>Setback Requirements:</strong> Compliance with local building codes for oceanfront development</li>
+                            <li><strong>Height Restrictions:</strong> Maintain low-profile development respecting local architectural character</li>
+                            <li><strong>Access Requirements:</strong> Separate service and guest access routes for operational efficiency</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Sustainability Requirements</h4>
+                        <ul>
+                            <li><strong>Solar Power:</strong> Minimum 60% energy from renewable sources - roof design must accommodate solar panels</li>
+                            <li><strong>Rainwater Harvesting:</strong> Collection and storage systems integrated into architectural design</li>
+                            <li><strong>Natural Ventilation:</strong> Maximize passive cooling strategies to reduce mechanical systems</li>
+                            <li><strong>Waste Management:</strong> On-site composting and recycling facilities for hotel and villa operations</li>
+                            <li><strong>Water Conservation:</strong> Greywater recycling systems for irrigation and non-potable uses</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Site Planning Considerations</h3>
+                <div class="highlight">
+                    <h4>Optimal Facility Positioning</h4>
+                    <p>Strategic placement of facilities to maximize site advantages while addressing constraints:</p>
+                    
+                    <div class="three-columns">
+                        <div class="column">
+                            <h4>Oceanfront Positioning</h4>
+                            <ul>
+                                <li><strong>Guest Accommodations:</strong> Prime oceanfront location for sunset views from all rooms</li>
+                                <li><strong>Restaurant & Pool Bar:</strong> Sunset dining experiences with unobstructed ocean views</li>
+                                <li><strong>Pool Complex:</strong> Infinity edge toward ocean maximizing visual connection</li>
+                                <li><strong>Wellness Pavilions:</strong> Ocean breeze for natural cooling during treatments</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Natural Integration</h4>
+                            <ul>
+                                <li><strong>Tree Preservation:</strong> Buildings positioned to preserve mature trees for natural shade</li>
+                                <li><strong>Topography Following:</strong> Terraced design following natural land contours</li>
+                                <li><strong>Natural Drainage:</strong> Landscape design working with existing water flow patterns</li>
+                                <li><strong>Wind Patterns:</strong> Building orientation optimized for cross-ventilation</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Operational Efficiency</h4>
+                            <ul>
+                                <li><strong>Service Access:</strong> Back-of-house facilities positioned for efficient service delivery</li>
+                                <li><strong>Shared Services:</strong> Central location serving both hotel and villa guests</li>
+                                <li><strong>Circulation:</strong> Clear pathways connecting all facilities without disrupting guest experience</li>
+                                <li><strong>Parking & Storage:</strong> Discrete positioning maintaining aesthetic quality</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Infrastructure Requirements</h3>
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>Utilities & Services</h4>
+                        <ul>
+                            <li><strong>Electrical:</strong> Grid connection with solar backup systems</li>
+                            <li><strong>Water Supply:</strong> Municipal connection with rainwater harvesting supplement</li>
+                            <li><strong>Sewage:</strong> Treatment system serving hotel and villa development</li>
+                            <li><strong>Communications:</strong> High-speed internet and telecommunications infrastructure</li>
+                            <li><strong>Emergency Services:</strong> Fire safety systems and emergency vehicle access</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Transportation & Access</h4>
+                        <ul>
+                            <li><strong>Guest Access:</strong> Primary entrance with reception and arrival experience</li>
+                            <li><strong>Service Access:</strong> Separate service road for deliveries and maintenance</li>
+                            <li><strong>Parking:</strong> Guest and staff parking integrated into landscape design</li>
+                            <li><strong>Pedestrian Circulation:</strong> Covered walkways connecting all facilities</li>
+                            <li><strong>Emergency Access:</strong> Clear routes for emergency vehicles and evacuation</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Landscape & Environment</h4>
+                        <ul>
+                            <li><strong>Native Landscaping:</strong> Indigenous plants requiring minimal irrigation</li>
+                            <li><strong>Permaculture Gardens:</strong> Educational and productive landscape elements</li>
+                            <li><strong>Natural Shade:</strong> Preservation and enhancement of existing tree canopy</li>
+                            <li><strong>Erosion Control:</strong> Landscape design preventing coastal erosion</li>
+                            <li><strong>Wildlife Habitat:</strong> Maintaining local ecosystem balance</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3>Site Development Strategy</h3>
+                    <p>The site analysis reveals exceptional opportunities for creating Zanzibar's first Family Wellness Community Resort. The combination of oceanfront location, natural cooling from sea breezes, mature tree preservation, and proximity to authentic local community creates ideal conditions for the revolutionary hospitality concept. The key to success lies in careful land allocation that accommodates the complete 2,775 sqm program while preserving the site's natural advantages and ensuring seamless integration with the 35-villa development.</p>
+                </div>
+            </div>
+
+            <div id="demographics" class="tab-content">
+                <h2>Demographics & Market Analysis</h2>
+                <p>Comprehensive market validation and target demographic analysis supporting the Nafasi Family Wellness Community Resort concept</p>
+
+                <h3>Zanzibar Tourism Market Data (2024)</h3>
+                <div class="stats">
+                    <div class="stats-grid">
+                        <div class="stat-item">
+                            <span class="stat-number">736,755</span>
+                            <div class="stat-label">Total Visitors 2024<br/>(+15.4% growth)</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">71.6%</span>
+                            <div class="stat-label">European Market Share</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">8</span>
+                            <div class="stat-label">Average Nights Stay</div>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">98.3%</span>
+                            <div class="stat-label">Leisure Travelers</div>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>European Family Travel Trends (Google EMEA Travel Forecast 2025)</h3>
+                <p>Strong market validation for family wellness tourism from key European source markets</p>
+
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>Family Travel Demand</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">35%</span>
+                                <div class="stat-label">German travelers planning trips with children</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">32%</span>
+                                <div class="stat-label">UK travelers planning family trips</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">30%</span>
+                                <div class="stat-label">French travelers planning family trips</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">22%</span>
+                                <div class="stat-label">German travelers planning multi-generational trips</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">15%</span>
+                                <div class="stat-label">Italian travelers planning multi-generational trips</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h4>Cultural Experience Priority</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">52%</span>
+                                <div class="stat-label">French travelers prioritize cultural experiences for international travel</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">44%</span>
+                                <div class="stat-label">German travelers prioritize cultural experiences for international travel</div>
+                            </div>
+                        </div>
+                        <h4>Sustainability Focus</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">41%</span>
+                                <div class="stat-label">UK travelers consider environmental impact when choosing destinations</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">37%</span>
+                                <div class="stat-label">German travelers consider environmental impact when choosing destinations</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h4>Premium Spending Patterns</h4>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number">18%</span>
+                                <div class="stat-label">Increase in UK accommodation spending compared to 2024</div>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">15%</span>
+                                <div class="stat-label">Increase in UK activity spending compared to 2024</div>
+                            </div>
+                        </div>
+                        <h4>Market Implications</h4>
+                        <ul style="list-style: none; padding: 0;">
+                            <li style="padding: 4px 0;">• Strong demand for family-focused accommodations</li>
+                            <li style="padding: 4px 0;">• Cultural programming essential for European market</li>
+                            <li style="padding: 4px 0;">• Sustainability features drive destination choice</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Target Market Segmentation</h3>
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>Primary: Cultural Immersion Families</h4>
+                        <p><strong>Profile:</strong> Families with children seeking authentic cultural experiences and educational travel</p>
+                        <p><strong>Motivations:</strong> Want children to learn about different cultures, value meaningful travel over luxury tourism</p>
+                        <p><strong>Nafasi Appeal:</strong> Local community integration, traditional craft workshops, authentic cultural experiences</p>
+                        <p><strong>Behavior:</strong> Longer stays, participate in community activities, prioritize authentic experiences over amenities</p>
+                        <div class="highlight">
+                            <h4>Key Demographics</h4>
+                            <ul>
+                                <li><strong>Age:</strong> Parents 35-50, children 5-16</li>
+                                <li><strong>Income:</strong> Upper-middle class professionals</li>
+                                <li><strong>Education:</strong> University-educated, culturally aware</li>
+                                <li><strong>Values:</strong> Education, authenticity, cultural exchange</li>
+                                <li><strong>Travel Style:</strong> Experiential, educational, community-focused</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h4>Secondary: Wellness & Sustainability Seekers</h4>
+                        <p><strong>Profile:</strong> Health-conscious families prioritizing wellness and environmental responsibility</p>
+                        <p><strong>Motivations:</strong> Family wellness time, sustainable travel choices, guilt-free parent relaxation</p>
+                        <p><strong>Nafasi Appeal:</strong> Family wellness programming, eco-design features, professional childcare enabling parent wellness</p>
+                        <p><strong>Behavior:</strong> Premium spending on wellness services, choose destinations based on sustainability credentials</p>
+                        <div class="highlight">
+                            <h4>Key Demographics</h4>
+                            <ul>
+                                <li><strong>Age:</strong> Parents 30-45, children 3-14</li>
+                                <li><strong>Income:</strong> High disposable income, wellness-focused spending</li>
+                                <li><strong>Lifestyle:</strong> Health-conscious, environmentally aware</li>
+                                <li><strong>Values:</strong> Wellness, sustainability, family time</li>
+                                <li><strong>Travel Style:</strong> Wellness-focused, eco-conscious, premium experiences</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <h4>Tertiary: Retreat Organizers & Group Leaders</h4>
+                        <p><strong>Profile:</strong> Wellness practitioners, family coaches, educational tour operators organizing group experiences</p>
+                        <p><strong>Motivations:</strong> Unique venue for family retreats, cultural immersion programs, wellness workshops</p>
+                        <p><strong>Nafasi Appeal:</strong> Flexible programming spaces, professional childcare support, authentic cultural integration</p>
+                        <p><strong>Behavior:</strong> Book multiple rooms, extended stays, repeat bookings, referral generation</p>
+                        <div class="highlight">
+                            <h4>Key Demographics</h4>
+                            <ul>
+                                <li><strong>Profile:</strong> Professional organizers, wellness practitioners</li>
+                                <li><strong>Group Size:</strong> 8-20 participants, multiple families</li>
+                                <li><strong>Booking Pattern:</strong> Advance bookings, seasonal programs</li>
+                                <li><strong>Value:</strong> Unique venues, comprehensive programming</li>
+                                <li><strong>Influence:</strong> High referral potential, social media presence</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Market Validation Analysis</h3>
+                <div class="highlight">
+                    <h4>Strong Market Fundamentals</h4>
+                    <p>The demographic analysis reveals exceptional market conditions for the Nafasi Family Wellness Community Resort concept:</p>
+                    
+                    <div class="three-columns">
+                        <div class="column">
+                            <h4>Growing Family Travel Market</h4>
+                            <ul>
+                                <li><strong>35% of German travelers</strong> planning family trips represents significant market opportunity</li>
+                                <li><strong>Multi-generational travel</strong> growing with 22% of German and 15% of Italian travelers</li>
+                                <li><strong>Extended stays</strong> align with 8-night average in Zanzibar</li>
+                                <li><strong>Premium spending</strong> increasing 15-18% in key markets</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Cultural Experience Demand</h4>
+                            <ul>
+                                <li><strong>52% of French travelers</strong> prioritize cultural experiences</li>
+                                <li><strong>44% of German travelers</strong> seek authentic cultural programming</li>
+                                <li><strong>Educational travel</strong> growing among families with children</li>
+                                <li><strong>Community engagement</strong> valued over generic resort experiences</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Sustainability Imperative</h4>
+                            <ul>
+                                <li><strong>41% of UK travelers</strong> consider environmental impact</li>
+                                <li><strong>37% of German travelers</strong> factor sustainability into decisions</li>
+                                <li><strong>Eco-conscious families</strong> willing to pay premium for sustainable options</li>
+                                <li><strong>Measurable impact</strong> increasingly important for destination choice</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <h3>Competitive Positioning Analysis</h3>
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>Market Gap Identification</h4>
+                        <ul>
+                            <li><strong>No Family Wellness Resorts</strong> currently exist in Zanzibar market</li>
+                            <li><strong>Limited Authentic Cultural Programming</strong> in existing hospitality offerings</li>
+                            <li><strong>Professional Childcare Gap</strong> preventing parents from enjoying wellness experiences</li>
+                            <li><strong>Sustainability Leadership Opportunity</strong> with 60% renewable energy target</li>
+                            <li><strong>Community Integration Missing</strong> from current resort models</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>First-Mover Advantages</h4>
+                        <ul>
+                            <li><strong>Category Creation:</strong> Establishing "Family Wellness Community Resort" category</li>
+                            <li><strong>Market Education:</strong> Defining new hospitality experience expectations</li>
+                            <li><strong>Brand Recognition:</strong> Becoming synonymous with family wellness in East Africa</li>
+                            <li><strong>Partnership Development:</strong> Exclusive relationships with local schools and artisans</li>
+                            <li><strong>Operational Expertise:</strong> Developing specialized family wellness programming</li>
+                        </ul>
+                    </div>
+                    <div class="column">
+                        <h4>Scalability Potential</h4>
+                        <ul>
+                            <li><strong>Replicable Model:</strong> Concept adaptable to other destinations</li>
+                            <li><strong>Brand Extension:</strong> Nafasi brand applicable to family wellness category</li>
+                            <li><strong>Partnership Network:</strong> Relationships with wellness practitioners and family coaches</li>
+                            <li><strong>Operational Systems:</strong> Standardized family wellness programming</li>
+                            <li><strong>Market Leadership:</strong> Establishing industry standards for family wellness tourism</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <h3>Revenue Optimization Opportunities</h3>
+                <div class="highlight">
+                    <h4>Multiple Revenue Streams</h4>
+                    <div class="three-columns">
+                        <div class="column">
+                            <h4>Accommodation Revenue</h4>
+                            <ul>
+                                <li><strong>Premium Room Rates:</strong> Enhanced sizes (50-80 sqm) command premium pricing</li>
+                                <li><strong>Extended Stays:</strong> Cultural programming encourages longer visits</li>
+                                <li><strong>Multi-Generational Bookings:</strong> Multiple rooms per family group</li>
+                                <li><strong>Seasonal Optimization:</strong> Year-round appeal with indoor/outdoor facilities</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Wellness & Programming Revenue</h4>
+                            <ul>
+                                <li><strong>Professional Childcare:</strong> Premium service enabling parent wellness spending</li>
+                                <li><strong>Spa Treatments:</strong> Adult treatments while children in supervised programs</li>
+                                <li><strong>Cultural Workshops:</strong> Traditional craft and cooking classes</li>
+                                <li><strong>Educational Programs:</strong> Sustainability and permaculture workshops</li>
+                            </ul>
+                        </div>
+                        <div class="column">
+                            <h4>Group & Retreat Revenue</h4>
+                            <ul>
+                                <li><strong>Family Retreat Packages:</strong> Wellness practitioners organizing group experiences</li>
+                                <li><strong>Educational Tours:</strong> Schools and family groups seeking cultural immersion</li>
+                                <li><strong>Corporate Family Programs:</strong> Companies offering family wellness benefits</li>
+                                <li><strong>Repeat Business:</strong> High satisfaction driving return visits and referrals</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="highlight">
+                    <h3>Market Validation Summary</h3>
+                    <p>The demographic analysis confirms exceptional market opportunity for the Nafasi Family Wellness Community Resort. With 71.6% European market share in Zanzibar, growing family travel demand (35% of German travelers), strong cultural experience priorities (52% of French travelers), and increasing sustainability focus (41% of UK travelers), the market conditions align perfectly with Nafasi's revolutionary concept. The absence of family wellness resorts in Zanzibar creates a clear first-mover advantage, while the integration of authentic cultural programming and professional childcare addresses unmet market needs. The combination of premium family accommodations, comprehensive wellness facilities, and genuine community engagement positions Nafasi to capture significant market share while establishing a new category in family hospitality.</p>
+                </div>
+            </div>
+
+            <div id="bua" class="tab-content">
+                <h2>BUA Facilities (1,005 sqm)</h2>
+                <p>Built-Up Area - Indoor hotel facilities</p>
+
+                <div class="three-columns">
+                    <div class="column">
+                        <h4>Guest Accommodations</h4>
+                        <div class="facility-total bua-color">700 sqm</div>
+                        <div class="component">
+                            <span class="component-name">6 Standard Rooms (50 sqm each)</span>
+                            <span class="component-size">300 sqm</span>
+                        </div>
+                        <div class="component">
+                            <span class="component-name">4 Deluxe Rooms (60 sqm each)</span>
+                            <span class="component-size">240 sqm</span>
+                        </div>
+                        <div class="component">
+                            <span class="component-name">2 Premium Suites (80 sqm each)</span>
+                            <span class="component-size">160 sqm</span>
+                        </div>
+                        <div class="facility-description">
+                            Enhanced room sizes for premium family comfort with king beds, sitting areas, and private outdoor spaces.
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <h4>Family Wellness Hub</h4>
+                        <div class="facility-total bua-color">125 sqm</div>
+                        <div class="component">
+                            <span class="component-name">Intergenerational Activity Center</span>
+                            <span class="component-size">80 sqm</span>
+                        </div>
+                        <div class="component">
+                            <span class="component-name">Nanny Station & Support</span>
+                            <span class="component-size">45 sqm</span>
+                        </div>
+                        <div class="facility-description">
+                            Professional childcare and family activity center with flexible zones and dedicated nanny station.
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <h4>F&B Indoor Facilities</h4>
+                        <div class="facility-total bua-color">180 sqm</div>
+                        <div class="component">
+                            <span class="component-name">Family Restaurant</span>
+                            <span class="component-size">140 sqm</span>
+                        </div>
+                        <div class="component">
+                            <span class="component-name">Pool Bar</span>
+                            <span class="component-size">40 sqm</span>
+                        </div>
+                        <div class="facility-description">
+                            Jungle immersive dining facilities with living tropical vegetation, open kitchen, and poolside bar service.
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="non-bua" class="tab-content">
+                <h2>Non-BUA Facilities (1,770 sqm)</h2>
+                <p>Outdoor programming + shared services</p>
+
+                <h3 class="non-bua-color">Pool Complex (650 sqm)</h3>
+                <div class="three-columns">
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Main Family Pool</h4>
+                        <div class="facility-total non-bua-color">200 sqm</div>
+                        <div class="facility-description">
+                            Infinity edge toward ocean, serves hotel + 35 villas, family-friendly depth zones
+                        </div>
+                    </div>
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Children's Pool</h4>
+                        <div class="facility-total non-bua-color">50 sqm</div>
+                        <div class="facility-description">
+                            Shallow depth, safety features, non-slip surfaces, separate from main pool
+                        </div>
+                    </div>
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Pool Deck & Lounging</h4>
+                        <div class="facility-total non-bua-color">400 sqm</div>
+                        <div class="facility-description">
+                            Extensive lounging areas, natural shade from preserved trees, family seating
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="non-bua-color">Wellness & Activities (650 sqm)</h3>
+                <div class="three-columns">
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Community & Wellness Pavilion</h4>
+                        <div class="facility-total non-bua-color">180 sqm</div>
+                        <div class="facility-description">
+                            Multi-purpose open-air pavilion: family yoga/meditation, cultural workshops, cooking classes, craft demonstrations, flexible programming space
+                        </div>
+                    </div>
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Adventure Playground</h4>
+                        <div class="facility-total non-bua-color">150 sqm</div>
+                        <div class="facility-description">
+                            Natural materials, age-appropriate zones, safety surfacing, parent supervision areas
+                        </div>
+                    </div>
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Spa Treatment Pavilions</h4>
+                        <div class="facility-total non-bua-color">120 sqm</div>
+                        <div class="facility-description">
+                            4 covered pavilions (30 sqm each) with traditional makuti roofing, privacy screens, relaxation areas
+                        </div>
+                    </div>
+                </div>
+                <div class="three-columns">
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Permaculture Learning Garden</h4>
+                        <div class="facility-total non-bua-color">200 sqm</div>
+                        <div class="facility-description">
+                            Educational gardens, composting, rainwater harvesting, sustainability education
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="shared-color">Shared Services (295 sqm)</h3>
+                <div class="three-columns">
+                    <div class="column" style="border-left: 4px solid #ea4335;">
+                        <h4 class="shared-color">Reception & Guest Services Building</h4>
+                        <div class="facility-total shared-color">65 sqm</div>
+                        <div class="facility-description">
+                            Family reception, concierge, guest information - serves hotel + 35 villas
+                        </div>
+                    </div>
+                    <div class="column" style="border-left: 4px solid #ea4335;">
+                        <h4 class="shared-color">Co-Working Space</h4>
+                        <div class="facility-total shared-color">30 sqm</div>
+                        <div class="facility-description">
+                            Dedicated workspace for guests - quiet environment, visual connection to children's areas
+                        </div>
+                    </div>
+                    <div class="column" style="border-left: 4px solid #ea4335;">
+                        <h4 class="shared-color">Back-of-House Operations</h4>
+                        <div class="facility-total shared-color">200 sqm</div>
+                        <div class="facility-description">
+                            Staff areas, storage, laundry, maintenance, waste management - shared hotel/villa services
+                        </div>
+                    </div>
+                </div>
+
+                <h3 class="non-bua-color">Additional Facilities (175 sqm)</h3>
+                <div class="three-columns">
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Pool & Restaurant Support Building</h4>
+                        <div class="facility-total non-bua-color">35 sqm</div>
+                        <div class="facility-description">
+                            Changing rooms, family WCs, outdoor showers, pool equipment storage
+                        </div>
+                    </div>
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Restaurant Outdoor Pergola</h4>
+                        <div class="facility-total non-bua-color">40 sqm</div>
+                        <div class="facility-description">
+                            Covered outdoor dining, garden views, weather protection
+                        </div>
+                    </div>
+                    <div class="column" style="border-left: 4px solid #34a853;">
+                        <h4 class="non-bua-color">Covered Walkways</h4>
+                        <div class="facility-total non-bua-color">100 sqm</div>
+                        <div class="facility-description">
+                            Weather protection, accessible pathways, connection between facilities
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        function showTab(tabName) {
+            // Hide all tab contents
+            const tabContents = document.querySelectorAll('.tab-content');
+            tabContents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+
+            // Show selected tab content
+            const targetTab = document.getElementById(tabName);
+            if (targetTab) {
+                targetTab.classList.add('active');
+            }
+
+            // Add active class to clicked tab
+            if (event && event.target) {
+                event.target.classList.add('active');
+            }
+        }
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set the concept tab as active by default
+            const conceptTab = document.getElementById('concept');
+            const firstNavTab = document.querySelector('.nav-tab');
+            
+            if (conceptTab) {
+                conceptTab.classList.add('active');
+            }
+            if (firstNavTab) {
+                firstNavTab.classList.add('active');
+            }
+        });
+
+        // Add click event listeners to all nav tabs
+        document.addEventListener('DOMContentLoaded', function() {
+            const navTabs = document.querySelectorAll('.nav-tab');
+            navTabs.forEach((tab, index) => {
+                tab.addEventListener('click', function() {
+                    const tabNames = ['concept', 'demographics', 'site-analysis', 'master-table'];
+                    showTab(tabNames[index]);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
